@@ -1,0 +1,25 @@
+{
+  "name": "book_list_app",
+  "version": "1.0.0",
+  "description": "Application that will allow users to upload and review books",
+  "main": "server.js",
+  "scripts": {
+    "watch": "nodemon server.js",
+    "start": "node index.js",
+    "lint": "eslint **/*.js",
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
+  },
+  "keywords": [],
+  "author": "Code Fellows, LLC",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.2",
+    "method-override": "^3.0.0",
+    "pg": "^7.3.0",
+    "superagent": "^3.8.3"
+  }
+}
