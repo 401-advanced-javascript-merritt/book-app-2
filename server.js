@@ -44,7 +44,9 @@ app.delete('/books/:id', deleteBook);
 
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
-app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+let start = (port = process.env.Port) => {
+  app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+}
 
 // HELPER FUNCTIONS
 function Book(info) {
@@ -169,3 +171,6 @@ function deleteBook(request, response) {
 function handleError(error, response) {
   response.render('pages/error', { error: error });
 }
+
+
+module.exports = {app, start}
