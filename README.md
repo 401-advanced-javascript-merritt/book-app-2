@@ -8,7 +8,7 @@
 -Thanks to Joseph Wolfe, Billy Bunn, Alex White, and Vanessa Wei for contributing.
 
 ### Links and Resources
-* [repo]()
+* [repo](https://github.com/401-advanced-javascript-merritt/book-app-2/pull/2)
 
 [![Build Status](https://www.travis-ci.com/401-advanced-javascript-merritt/book-app-2.svg?branch=bookappwork)](https://www.travis-ci.com/401-advanced-javascript-merritt/book-app-2)
 
