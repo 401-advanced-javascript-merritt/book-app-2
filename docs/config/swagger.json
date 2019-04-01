@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Core API",
+    "description": "The worlds funnest little API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Get all data",
+        "responses": {
+          "200": {
+            "description": "Returned a list of books",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "description": "Get One Books",
+        "responses": {
+          "200": {
+            "description": "Returned one book",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete One Book",
+        "responses": {
+          "200": {
+            "description": "Deleted one book",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delete"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Replace a book",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returned the updated book",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books": {
+      "post": {
+        "description": "Create a new book",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returned the created book",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookList": {
+        "type": "array",
+        "example": [
+          {
+            "id": 1,
+            "title": "Dune",
+            "author": "Frank Herbert",
+            "isbn" : "12345",
+            "description":"About the book",
+            "bookshelf" : "Sci fi"
+          }
+          
+        ]
+      },
+      "NewBook": {
+        "type": "object",
+        "example": {
+          
+            "id": 1,
+            "title": "Dune",
+            "author": "Frank Herbert",
+            "isbn" : "12345",
+            "description":"About the book",
+            "bookshelf" : "Sci fi"
+          
+        }
+      },
+      "Book": {
+        "type": "object",
+        "example": {
+          
+            "id": 1,
+            "title": "Dune",
+            "author": "Frank Herbert",
+            "isbn" : "12345",
+            "description":"About the book",
+            "bookshelf" : "Sci fi"
+          
+        }
+      },
+      "Delete": {
+        "type": "object",
+        "example": {}
+      }
+    }
+  }
+}

@@ -2,23 +2,21 @@
 
 console.log('inside book schema');
 
+// eslint-disable-next-line no-unused-vars
 const bookshelves = require('./bookshelf-schema.js');
 
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 
+// eslint-disable-next-line new-cap
 const books = mongoose.Schema({
-  //_id: {type:Number, required:true},
   title: {type:String, required: true},
   author: { type:String, required: true},
   isbn: {type:String, required: true},
   image_url: {type:String, required: false},
   description: {type: String, required: false},
-  //bookshelf: {type: String, required: false},
 },{toObject:{virtuals: true}, toJSON: {virtuals:true}}
- );
-
-// console.log('before virtual in book schema');
+);
 
 books.virtual('bookshelves', {
   ref: 'bookshelves',
@@ -27,22 +25,21 @@ books.virtual('bookshelves', {
   justOne: false,
 });
 
-console.log('after virtual in book schema');
-
+/**
+ * Just before the find function is run, populate the virtual schema with the values for bookshelf.
+ * @param  {} 'find'
+ * @param  {} function(
+ * @param  {} {try{this.populate('bookshelves'
+ * @param  {} ;}catch(e
+ * @param  {} {console.error('finderror'
+ * @param  {} e
+ * @param  {} ;}}
+ */
 books.pre('find', function() {
   try{
     this.populate('bookshelves');
-    //console.log('after populate', this.populate('actualBookshelf').schema);
   }
   catch(e) {console.error('find error', e); }
 });
-
-// books.pre('save', function(){
-//   try{
-//     this.populate('bookshelves');
-//     console.log('pre save');
-//   }
-//   catch(e) {console.error('find error', e)}
-// })
 
 module.exports = mongoose.model('books', books);

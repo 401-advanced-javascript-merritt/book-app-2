@@ -23,21 +23,28 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use('/docs', express.static('docs'));
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 //all routes in here
-  app.use(apiRoutes);
-  app.use(routes);
-  
-  //Catch problems
-  app.use(notFound);
-  app.use(errorHandler);
-  
-  module.exports = {
-    server: app,
-    start: port => {
-      let PORT = port || process.env.PORT || 8080;
-      app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
-    },
-  };
+app.use(apiRoutes);
+app.use(routes);
+
+//Catch problems
+app.use(notFound);
+app.use(errorHandler);
+
+/**
+ * Start the server.
+ * @param  {} PORT
+ * @param  {} =>console.log(listeningonport)
+ */
+module.exports = {
+  server: app,
+  start: port => {
+    let PORT = port || process.env.PORT || 8080;
+    app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
+  },
+};

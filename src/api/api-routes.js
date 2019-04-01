@@ -1,5 +1,7 @@
 'use strict';
 
+const errorHandler = require(`./../middleware/500.js`);
+
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
@@ -9,6 +11,7 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.post('/searches', createSearch);
@@ -28,7 +31,7 @@ function createSearch(request, response) {
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => response.render('pages/searches/show', { results: results }))
-    .catch(err => handleError(err, response));
+    .catch(errorHandler);
 }
 
 // HELPER FUNCTIONS

@@ -17,7 +17,7 @@ else if(process.env.DATABASE === 'mongo') {
     useNewUrlParser:true,
     useCreateIndex: true,
   };
-  
+
   mongoose.connect(process.env.MONGODB_URI, mongooseOptions);
 }
 
