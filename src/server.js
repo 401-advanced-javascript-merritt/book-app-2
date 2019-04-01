@@ -17,28 +17,27 @@ const apiRoutes = require(`${cwd}/src/api/api-routes.js`);
 
 // Application Setup
 const app = express();
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
 
-const PORT = process.env.PORT;
-
-let start = (port = process.env.Port) => {
-  app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
-}
-// middleware
 app.use(cors());
 app.use(morgan('dev'));
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 //all routes in here
-app.use(apiRoutes);
-app.use(routes);
-
-//Catch problems
-app.use(notFound);
-app.use(errorHandler);
-
-
-module.exports = {app, start}
+  app.use(apiRoutes);
+  app.use(routes);
+  
+  //Catch problems
+  app.use(notFound);
+  app.use(errorHandler);
+  
+  module.exports = {
+    server: app,
+    start: port => {
+      let PORT = port || process.env.PORT || 8080;
+      app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
+    },
+  };
